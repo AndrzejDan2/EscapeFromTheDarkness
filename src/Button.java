@@ -16,5 +16,4 @@ public class Button extends JButton {
         setBounds(this.x, this.y, this.width, this.height);
     }
 
-
 }

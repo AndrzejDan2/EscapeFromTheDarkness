@@ -10,7 +10,10 @@ public class GameWindow extends JWindow{
         setSize(windowWidth, windowHeight);
         setLocation((screenSize.width- windowWidth)/2, (screenSize.height- windowHeight)/2);
         setLayout(null); // bez tego setBounds dla GameArea sie nie ustawi
+        Menu menu = new Menu();
+        add(menu);
         add(gameArea);
+
         setVisible(true);
     }
 }
