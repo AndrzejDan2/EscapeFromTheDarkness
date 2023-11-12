@@ -11,7 +11,7 @@ public class GameArea extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        g2.drawRect(10, 10, 10, 10);
+        g2.fillRect(10, 10, 10, 10);
         g2.setColor(Color.PINK);
     }
 }
