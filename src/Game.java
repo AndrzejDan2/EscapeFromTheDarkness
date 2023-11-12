@@ -5,6 +5,7 @@ public class Game implements Runnable{
     public Game() {
         ga = new GameArea();
         GameWindow gw = new GameWindow(ga);
+        ga.requestFocus();
         startGameLoop();
     }
 
