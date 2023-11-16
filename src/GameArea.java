@@ -4,8 +4,8 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 public class GameArea extends JPanel {
-    int x = 10;
-    int y = 10;
+    int x = 40;
+    int y = 40;
     final int tileSize = 40; //40x40
     final int row = 17;
     final int col = 25;

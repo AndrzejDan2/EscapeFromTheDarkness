@@ -23,6 +23,7 @@ public class MapConfigurator {
 
             tile[1] = new Tile();
             tile[1].bufferedImage = ImageIO.read(new File("res/Tilev2.png"));
+            tile[1].collision = true;
 
         }catch (IOException e){
             e.printStackTrace();
