@@ -16,10 +16,10 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()){
-            case KeyEvent.VK_W -> gameArea.y -= 5;
-            case KeyEvent.VK_S -> gameArea.y += 5;
-            case KeyEvent.VK_A -> gameArea.x -= 5;
-            case KeyEvent.VK_D -> gameArea.x += 5;
+            case KeyEvent.VK_W -> gameArea.addPlayerY(-5);
+            case KeyEvent.VK_S -> gameArea.addPlayerY(5);
+            case KeyEvent.VK_A -> gameArea.addPlayerX(-5);
+            case KeyEvent.VK_D -> gameArea.addPlayerX(5);
         }
     }
 

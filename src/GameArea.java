@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
 
 public class GameArea extends JPanel {
     int x = 40;
@@ -9,10 +7,14 @@ public class GameArea extends JPanel {
     final int tileSize = 40; //40x40
     final int row = 17;
     final int col = 25;
+    Game game;
 
-    MapConfigurator mapConfigurator = new MapConfigurator(this);
-    public GameArea() {
+    Player player;
+    //MapConfigurator mapConfigurator = new MapConfigurator(this);
+    public GameArea(Game game, Player player) {
         super();
+        this.game = game;
+        this.player = player;
         setBackground(Color.darkGray);
         setBounds(10,68, 1000, 680);
         addKeyListener(new KeyHandler(this));
@@ -22,8 +24,16 @@ public class GameArea extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        mapConfigurator.draw(g2);
-        g2.setColor(Color.GREEN);
-        g2.fillRect(x, y, 40, 40);
+        //mapConfigurator.draw(g2);
+        //player.draw(g2);
+        game.render(g);
+    }
+
+    public void addPlayerX(int val){
+        player.x += val;
+    }
+
+    public void addPlayerY(int val){
+        player.y += val;
     }
 }

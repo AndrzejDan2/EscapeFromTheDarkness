@@ -1,10 +1,18 @@
+import java.awt.*;
+
 public class Game implements Runnable{
     private Thread gameThread;
     private final int FPS = 120;
     private GameArea ga;
+    private Player player;
+    private MapConfigurator mapConfigurator;
+    private GameWindow gw;
     public Game() {
-        ga = new GameArea();
-        GameWindow gw = new GameWindow(ga);
+
+        player = new Player();
+        ga = new GameArea(this, player);
+        mapConfigurator = new MapConfigurator(ga);
+        gw = new GameWindow(ga);
         ga.requestFocus();
         startGameLoop();
     }
@@ -12,6 +20,11 @@ public class Game implements Runnable{
     public void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void render(Graphics g){
+        mapConfigurator.draw(g);
+        player.render(g);
     }
 
     @Override

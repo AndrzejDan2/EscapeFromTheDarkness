@@ -60,8 +60,6 @@ public class MapConfigurator {
                 }
                 row++;
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
