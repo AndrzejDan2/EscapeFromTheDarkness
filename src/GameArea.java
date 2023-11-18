@@ -29,11 +29,11 @@ public class GameArea extends JPanel {
         game.render(g);
     }
 
-    public void addPlayerX(int val){
-        player.x += val;
+    public void setDX(int val){
+        player.dx = val;
     }
 
-    public void addPlayerY(int val){
-        player.y += val;
+    public void setDY(int val){
+        player.dy = val;
     }
 }

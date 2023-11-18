@@ -15,6 +15,8 @@ public class Player {
     final int width = 40;
     final int height = 40;
     int x,y;
+
+    int dx, dy;
     //TODO speed
     //TODO hitbox
 
@@ -22,13 +24,17 @@ public class Player {
     public Player() {
         x = 50;
         y = 50;
+        dx = 0;
+        dy = 0;
         setImage();
 
     }
 
     public void render(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(this.bufferedImage,this.x, this.y ,this.width, this.height, null);
+        this.x += this.dx;
+        this.y += this.dy;
+        g2.drawImage(this.bufferedImage,this.x, this.y,this.width, this.height, null);
 
     }
 
