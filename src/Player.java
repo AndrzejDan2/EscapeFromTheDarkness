@@ -14,7 +14,11 @@ public class Player {
     GameArea gameArea;
     final int width = 40;
     final int height = 40;
-    int x,y;
+    int x;
+    int y;
+
+    double normalSpeed = 5;
+    double diagonalSpeed;
 
     int dx, dy;
     //TODO speed
@@ -26,6 +30,7 @@ public class Player {
         y = 50;
         dx = 0;
         dy = 0;
+        diagonalSpeed = 0.707 * normalSpeed;
         setImage();
 
     }
@@ -34,8 +39,26 @@ public class Player {
         Graphics2D g2 = (Graphics2D) g;
         this.x += this.dx;
         this.y += this.dy;
-        g2.drawImage(this.bufferedImage,this.x, this.y,this.width, this.height, null);
+        g2.drawImage(this.bufferedImage,this.moveX(), this.moveY(), this.width, this.height, null);
 
+    }
+
+    public int moveX(){
+        if(this.dx != 0 && this.dy != 0){
+            x += (int)(dx * diagonalSpeed);
+        }else{
+            x += (int)(dx * normalSpeed);
+        }
+        return x;
+    }
+
+    public int moveY(){
+        if(this.dx != 0 && this.dy != 0){
+            y += (int)(dy * diagonalSpeed);
+        }else{
+            y += (int)(dy * normalSpeed);
+        }
+        return y;
     }
 
     public void setImage(){

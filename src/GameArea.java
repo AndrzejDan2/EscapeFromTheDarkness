@@ -10,6 +10,8 @@ public class GameArea extends JPanel {
     Game game;
 
     Player player;
+
+    KeyHandler keyHandler;
     //MapConfigurator mapConfigurator = new MapConfigurator(this);
     public GameArea(Game game, Player player) {
         super();
@@ -17,7 +19,7 @@ public class GameArea extends JPanel {
         this.player = player;
         setBackground(Color.darkGray);
         setBounds(10,68, 1000, 680);
-        addKeyListener(new KeyHandler(this));
+        keyHandler = new KeyHandler(this);
     }
 
 
