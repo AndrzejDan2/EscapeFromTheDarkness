@@ -14,7 +14,6 @@ public class GameWindow extends JFrame{
         Menu menu = new Menu();
         add(menu);
         add(gameArea);
-
         setVisible(true);
     }
 }

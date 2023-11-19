@@ -1,17 +1,34 @@
+import java.awt.*;
+
 public class Game implements Runnable{
     private Thread gameThread;
+    static final int tileSize = 40; //40x40
+    static final int row = 17;
+    static final int col = 25;
     private final int FPS = 120;
     private GameArea ga;
+    private Player player;
+    private MapConfigurator mapConfigurator;
+    private GameWindow gw;
+
     public Game() {
-        ga = new GameArea();
-        GameWindow gw = new GameWindow(ga);
+        mapConfigurator = new MapConfigurator(this);
+        player = new Player();
+        ga = new GameArea(this, player);
+        gw = new GameWindow(ga);
         ga.requestFocus();
         startGameLoop();
+        player.loadMapData(mapConfigurator);
     }
 
     public void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void render(Graphics g){
+        mapConfigurator.draw(g);
+        player.render(g);
     }
 
     @Override
