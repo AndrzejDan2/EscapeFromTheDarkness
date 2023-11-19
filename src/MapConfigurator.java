@@ -4,14 +4,14 @@ import java.awt.*;
 import java.io.*;
 
 public class MapConfigurator {
-    GameArea gameArea;
+    Game game;
     Tile[] tile = new Tile[2];
 
-    int[][] mapData;
+    public int[][] mapData;
 
-    public MapConfigurator(GameArea gameArea) {
-        this.gameArea = gameArea;
-        mapData = new int[gameArea.col][gameArea.row];
+    public MapConfigurator(Game game) {
+        this.game = game;
+        mapData = new int[Game.col][Game.row];
         getImage();
         loadMap();
     }
@@ -32,12 +32,12 @@ public class MapConfigurator {
 
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        for(int i = 0; i < gameArea.row; i++){
-            for(int j = 0; j < gameArea.col; j++){
+        for(int i = 0; i < game.row; i++){
+            for(int j = 0; j < game.col; j++){
                 if(mapData[j][i] == 0){
-                    g2.drawImage(tile[0].bufferedImage,j * gameArea.tileSize, i * gameArea.tileSize ,gameArea.tileSize, gameArea.tileSize, null);
+                    g2.drawImage(tile[0].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
                 } else if (mapData[j][i] == 1) {
-                    g2.drawImage(tile[1].bufferedImage,j * gameArea.tileSize, i * gameArea.tileSize ,gameArea.tileSize, gameArea.tileSize, null);
+                    g2.drawImage(tile[1].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class MapConfigurator {
 
             while((line = bufferedReader.readLine()) != null){
                 splitLine = line.split(" ");
-                for(int i = 0; i < gameArea.col; i++){
+                for(int i = 0; i < Game.col; i++){
                     mapData[i][row] = Integer.parseInt(String.valueOf(splitLine[i]));
                 }
                 row++;
@@ -64,6 +64,7 @@ public class MapConfigurator {
             throw new RuntimeException(e);
         }
     }
+
 
 
 }

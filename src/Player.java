@@ -11,19 +11,18 @@ import java.io.IOException;
 public class Player {
     BufferedImage bufferedImage;
 
-    GameArea gameArea;
     final int width = 40;
     final int height = 40;
     int x;
     int y;
 
-    double normalSpeed = 5;
+    double normalSpeed = 2;
     double diagonalSpeed;
 
     int dx, dy;
-    //TODO speed
     //TODO hitbox
-
+    MapConfigurator mapConfigurator;
+    boolean isMapLoaded;
 
     public Player() {
         x = 50;
@@ -31,34 +30,121 @@ public class Player {
         dx = 0;
         dy = 0;
         diagonalSpeed = 0.707 * normalSpeed;
+        isMapLoaded = false;
         setImage();
 
     }
 
+    public void loadMapData(MapConfigurator mapConfigurator){
+        this.mapConfigurator = mapConfigurator;
+    }
+
+
+
     public void render(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        this.x += this.dx;
-        this.y += this.dy;
         g2.drawImage(this.bufferedImage,this.moveX(), this.moveY(), this.width, this.height, null);
 
     }
 
     public int moveX(){
+
         if(this.dx != 0 && this.dy != 0){
-            x += (int)(dx * diagonalSpeed);
+
+            if(dx > 0 && dy > 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)){
+                x += (int)(dx * diagonalSpeed);
+            }
+            if(dx < 0 && dy > 0
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx, y + dy)){
+                x += (int)(dx * diagonalSpeed);
+            }
+            if(dx > 0 && dy < 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)){
+                x += (int)(dx * diagonalSpeed);
+            }
+            if(dx < 0 && dy < 0
+                    && !isSolid(x + dx, y + dy)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)){
+                x += (int)(dx * diagonalSpeed);
+            }
+
         }else{
-            x += (int)(dx * normalSpeed);
+
+            if(dx > 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + Game.tileSize - 1)){
+                x += (int)(dx * normalSpeed);
+            }
+            if(dx < 0
+                    && !isSolid(x + dx, y)
+                    && !isSolid(x + dx, y + Game.tileSize - 1)){
+                x += (int)(dx * normalSpeed);
+            }
+
         }
         return x;
     }
 
     public int moveY(){
+
         if(this.dx != 0 && this.dy != 0){
-            y += (int)(dy * diagonalSpeed);
+
+            if(dx > 0 && dy > 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)){
+                y += (int)(dy * diagonalSpeed);
+            }
+            if(dx < 0 && dy > 0
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)
+                    && !isSolid(x + dx, y + dy)){
+                y += (int)(dy * diagonalSpeed);
+            }
+            if(dx > 0 && dy < 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy + Game.tileSize - 1)){
+                y += (int)(dy * diagonalSpeed);
+            }
+            if(dx < 0 && dy < 0
+                    && !isSolid(x + dx, y + dy)
+                    && !isSolid(x + dx + Game.tileSize - 1, y + dy)
+                    && !isSolid(x + dx, y + dy + Game.tileSize - 1)){
+                y += (int)(dy * diagonalSpeed);
+            }
+
         }else{
-            y += (int)(dy * normalSpeed);
+
+            if(dy > 0
+                    && !isSolid(x + dx + Game.tileSize - 1, y + Game.tileSize - 1)
+                    && !isSolid(x + dx, y + Game.tileSize - 1)){
+                y += (int)(dy * normalSpeed);
+            }
+            if(dy < 0
+                    && !isSolid(x + dx, y )
+                    && !isSolid(x + dx + Game.tileSize - 1, y)){
+                y += (int)(dy * normalSpeed);
+            }
+
         }
         return y;
+    }
+
+
+    public boolean isSolid(int x, int y){
+        int tempX = (int)(x/ Game.tileSize);
+        int tempY = (int)(y/ Game.tileSize);
+        int tempTile = this.mapConfigurator.mapData[tempX][tempY];
+        return mapConfigurator.tile[tempTile].collision;
     }
 
     public void setImage(){
