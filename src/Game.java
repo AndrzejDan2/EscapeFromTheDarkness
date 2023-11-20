@@ -9,6 +9,7 @@ public class Game implements Runnable{
     private GameArea ga;
     private Player player;
     private MapConfigurator mapConfigurator;
+    private MapMask mapMask;
     private GameWindow gw;
 
     public Game() {
@@ -17,8 +18,9 @@ public class Game implements Runnable{
         ga = new GameArea(this, player);
         gw = new GameWindow(ga);
         ga.requestFocus();
-        startGameLoop();
+        mapMask = new MapMask(player);
         player.loadMapData(mapConfigurator);
+        startGameLoop();
     }
 
     public void startGameLoop(){
@@ -29,6 +31,7 @@ public class Game implements Runnable{
     public void render(Graphics g){
         mapConfigurator.draw(g);
         player.render(g);
+        //mapMask.render(g); //TODO uncomment if necessary
     }
 
     @Override
