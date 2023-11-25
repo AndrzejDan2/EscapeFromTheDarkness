@@ -20,6 +20,7 @@ public class Game implements Runnable{
         ga.requestFocus();
         mapMask = new MapMask(player);
         player.loadMapData(mapConfigurator);
+
         startGameLoop();
     }
 
