@@ -1,5 +1,5 @@
 public enum GameState {
-    PLAY, PAUSE, RESULTS;
+    PLAY, PAUSE, QUEST, RESULTS;
 
     public static GameState state = PAUSE;
 }
