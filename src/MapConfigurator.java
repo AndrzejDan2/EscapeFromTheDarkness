@@ -5,7 +5,7 @@ import java.io.*;
 
 public class MapConfigurator {
     Game game;
-    Tile[] tile = new Tile[2];
+    Tile[] tile = new Tile[3];
 
     public int[][] mapData;
 
@@ -25,6 +25,9 @@ public class MapConfigurator {
             tile[1].bufferedImage = ImageIO.read(new File("res/Tilev2.png"));
             tile[1].collision = true;
 
+            tile[2] = new Tile();
+            tile[2].bufferedImage = ImageIO.read(new File("res/Tilev3.png"));
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -34,11 +37,7 @@ public class MapConfigurator {
         Graphics2D g2 = (Graphics2D) g;
         for(int i = 0; i < game.row; i++){
             for(int j = 0; j < game.col; j++){
-                if(mapData[j][i] == 0){
-                    g2.drawImage(tile[0].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
-                } else if (mapData[j][i] == 1) {
-                    g2.drawImage(tile[1].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
-                }
+                g2.drawImage(tile[mapData[j][i]].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
             }
         }
 
