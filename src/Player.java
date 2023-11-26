@@ -19,7 +19,8 @@ public class Player {
     double normalSpeed = 2;
     double diagonalSpeed;
 
-    int dx, dy;
+    int dx;
+    int dy;
     //TODO hitbox
     MapConfigurator mapConfigurator;
     boolean isMapLoaded;
@@ -43,11 +44,15 @@ public class Player {
 
     public void render(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(this.bufferedImage,this.moveX(), this.moveY(), this.width, this.height, null);
+        g2.drawImage(this.bufferedImage,this.x, this.y, this.width, this.height, null);
 
     }
+    public void update(){
+        moveX();
+        moveY();
+    }
 
-    public int moveX(){
+    public void moveX(){
 
         if(this.dx != 0 && this.dy != 0){
 
@@ -90,10 +95,9 @@ public class Player {
             }
 
         }
-        return x;
     }
 
-    public int moveY(){
+    public void moveY(){
 
         if(this.dx != 0 && this.dy != 0){
 
@@ -134,9 +138,7 @@ public class Player {
                     && !isSolid(x + dx + Game.tileSize - 1, y)){
                 y += (int)(dy * normalSpeed);
             }
-
         }
-        return y;
     }
 
 

@@ -7,32 +7,50 @@ public class Game implements Runnable{
     static final int col = 25;
     private final int FPS = 120;
     private GameArea ga;
-    private Player player;
-    private MapConfigurator mapConfigurator;
-    private MapMask mapMask;
     private GameWindow gw;
+    private Gameplay gameplay;
 
     public Game() {
-        mapConfigurator = new MapConfigurator(this);
-        player = new Player();
-        ga = new GameArea(this, player);
+        gameplay = new Gameplay(this);
+        ga = new GameArea(this);
         gw = new GameWindow(ga);
+        ga.setFocusable(true);
         ga.requestFocus();
-        mapMask = new MapMask(player);
-        player.loadMapData(mapConfigurator);
-
         startGameLoop();
     }
+
+
 
     public void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
     }
+    public void update(){
+        switch (GameState.state){
+            case PLAY:
+                gameplay.update();
+                ga.requestFocus();
+                break;
+            case PAUSE:
+                break;
+            case QUEST:
+                break;
+            case RESULTS:
+                break;
+        }
+    }
 
     public void render(Graphics g){
-        mapConfigurator.draw(g);
-        player.render(g);
-        //mapMask.render(g); //TODO uncomment if necessary
+        switch(GameState.state){
+            case PLAY:
+            case PAUSE:
+                gameplay.render(g);
+                break;
+            case QUEST:
+                break;
+            case RESULTS:
+                break;
+        }
     }
 
     @Override
@@ -46,6 +64,7 @@ public class Game implements Runnable{
         while(gameThread != null){
             now = System.nanoTime();
             if(now - lastFrameTime >= timePerFrame){
+                update();
                 ga.repaint();
                 lastFrameTime = now;
                 frames++;
@@ -61,4 +80,11 @@ public class Game implements Runnable{
 
     }
 
+    public Gameplay getGameplay(){
+        return gameplay;
+    }
+
+    public GameArea getGameArea(){
+        return ga;
+    }
 }

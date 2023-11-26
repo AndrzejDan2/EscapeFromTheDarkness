@@ -6,17 +6,14 @@ public class GameArea extends JPanel {
 
     Game game;
 
-    Player player;
-
     KeyHandler keyHandler;
 
-    public GameArea(Game game, Player player) {
+    public GameArea(Game game) {
         super();
         this.game = game;
-        this.player = player;
         setBackground(Color.darkGray);
         setBounds(10,68, 1000, 680);
-        keyHandler = new KeyHandler(this);
+        keyHandler = new KeyHandler(this, game);
     }
 
 
@@ -26,11 +23,5 @@ public class GameArea extends JPanel {
         game.render(g);
     }
 
-    public void setDX(int val){
-        player.dx = val;
-    }
 
-    public void setDY(int val){
-        player.dy = val;
-    }
 }

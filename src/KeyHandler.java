@@ -6,9 +6,11 @@ import java.awt.event.KeyListener;
 public class KeyHandler {
 
     private GameArea gameArea;
+    private Game game;
 
-    public KeyHandler(GameArea gameArea) {
+    public KeyHandler(GameArea gameArea, Game game) {
         this.gameArea = gameArea;
+        this.game = game;
         bindInit();
     }
 
@@ -39,7 +41,7 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDY(-1);
+            game.getGameplay().setDY(-1);
         }
     }
 
@@ -47,7 +49,7 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDY(0);
+            game.getGameplay().setDY(0);
         }
     }
 
@@ -55,7 +57,7 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDY(1);
+            game.getGameplay().setDY(1);
         }
     }
 
@@ -63,14 +65,14 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDY(0);
+            game.getGameplay().setDY(0);
         }
     }
     public class LeftActionPressed extends AbstractAction{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDX(-1);
+            game.getGameplay().setDX(-1);
         }
     }
 
@@ -78,14 +80,14 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDX(0);
+            game.getGameplay().setDX(0);
         }
     }
     public class RightActionPressed extends AbstractAction{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDX(1);
+            game.getGameplay().setDX(1);
         }
     }
 
@@ -93,7 +95,7 @@ public class KeyHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameArea.setDX(0);
+            game.getGameplay().setDX(0);
         }
     }
 }
