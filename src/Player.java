@@ -26,14 +26,18 @@ public class Player {
     boolean isMapLoaded;
 
     public Player() {
-        x = 50;
-        y = 50;
         dx = 0;
         dy = 0;
+        initPosition(50,50);
         diagonalSpeed = 0.707 * normalSpeed;
         isMapLoaded = false;
         setImage();
 
+    }
+
+    public void initPosition(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
     public void loadMapData(MapConfigurator mapConfigurator){

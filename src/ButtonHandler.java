@@ -16,7 +16,7 @@ public class ButtonHandler implements ActionListener {
                     GameState.state = GameState.PAUSE;
                     break;
                 case "Restart":
-                    handleRestartButton();
+                    GameState.state = GameState.RESTART;
                     break;
                 case "Exit":
                     System.exit(0);

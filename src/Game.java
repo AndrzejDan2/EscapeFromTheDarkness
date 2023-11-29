@@ -47,6 +47,14 @@ public class Game implements Runnable{
                     stopCount = true;
                 }
                 break;
+            case RESTART:
+                gameplay.initTimeParameters();
+                gameplay.getPlayer().initPosition(50,50);
+                //TODO MapMask config
+                GameState.state = GameState.PAUSE;
+                ga.requestFocus();
+                stopCount = true;
+                break;
             case QUEST:
                 break;
 

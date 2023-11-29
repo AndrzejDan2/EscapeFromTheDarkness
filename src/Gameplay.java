@@ -6,9 +6,9 @@ public class Gameplay {
     private MapMask mapMask;
     private Game game;
 
-    public double gameTime = 0;
-    public long previousTime = 0;
-    public long currentTime = 0;
+    public double gameTime;
+    public long previousTime;
+    public long currentTime;
 
     public Gameplay(Game game) {
         this.game = game;
@@ -16,6 +16,13 @@ public class Gameplay {
         player = new Player();
         mapMask = new MapMask(player);
         player.loadMapData(mapConfigurator);
+        initTimeParameters();
+    }
+
+    public void initTimeParameters(){
+        gameTime = 0;
+        previousTime = 0;
+        currentTime = 0;
     }
 
     public void update(){
