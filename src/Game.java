@@ -9,6 +9,7 @@ public class Game implements Runnable{
     private GameArea ga;
     private GameWindow gw;
     private Gameplay gameplay;
+    private boolean stopCount = true;
 
     public Game() {
         gameplay = new Gameplay(this);
@@ -26,17 +27,29 @@ public class Game implements Runnable{
         gameThread.start();
     }
     public void update(){
+
         switch (GameState.state){
             case PLAY:
                 gameplay.update();
                 ga.requestFocus();
+                if(stopCount){
+                    gameplay.previousTime = System.currentTimeMillis();
+                    stopCount = false;
+                }
                 break;
+            case RESULTS:
             case PAUSE:
+                if(!stopCount){
+                    gameplay.currentTime = System.currentTimeMillis();
+                    gameplay.gameTime += (double)(gameplay.currentTime - gameplay.previousTime)/1000;
+                    System.out.println("czas gry: " + gameplay.gameTime);
+                    gameplay.previousTime = gameplay.currentTime;
+                    stopCount = true;
+                }
                 break;
             case QUEST:
                 break;
-            case RESULTS:
-                break;
+
         }
     }
 

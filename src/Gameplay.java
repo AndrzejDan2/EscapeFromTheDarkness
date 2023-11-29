@@ -6,7 +6,9 @@ public class Gameplay {
     private MapMask mapMask;
     private Game game;
 
-    public long gameTime = 0;
+    public double gameTime = 0;
+    public long previousTime = 0;
+    public long currentTime = 0;
 
     public Gameplay(Game game) {
         this.game = game;
