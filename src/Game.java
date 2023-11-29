@@ -66,6 +66,7 @@ public class Game implements Runnable{
             if(now - lastFrameTime >= timePerFrame){
                 update();
                 ga.repaint();
+                gameplay.getPlayer().checkWin();
                 lastFrameTime = now;
                 frames++;
             }

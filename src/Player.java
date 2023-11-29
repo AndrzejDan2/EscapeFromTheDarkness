@@ -156,4 +156,10 @@ public class Player {
             throw new RuntimeException(e);
         }
     }
+
+    public void checkWin(){
+        int tempX = x + Game.tileSize/2;
+        int tempY = y + Game.tileSize/2;
+        if(mapConfigurator.mapData[(int)tempX/Game.tileSize][(int)tempY/Game.tileSize] == 2) GameState.state = GameState.RESULTS;
+    }
 }

@@ -33,4 +33,8 @@ public class Gameplay {
     public void setDY(int val){
         player.dy = val;
     }
+
+    public Player getPlayer(){
+        return player;
+    }
 }
