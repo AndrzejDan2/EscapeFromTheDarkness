@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Objects;
 
 public class MapConfigurator {
     Game game;
@@ -47,7 +48,7 @@ public class MapConfigurator {
     public void loadMap(){
         int row = 0;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("config.txt")));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("config.txt"))));
             String line;
             String[] splitLine;
             String[] parsedLine;
