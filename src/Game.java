@@ -70,6 +70,7 @@ public class Game implements Runnable{
             case QUEST:
                 break;
             case RESULTS:
+                gameplay.showFinalState(g);
                 break;
         }
     }
