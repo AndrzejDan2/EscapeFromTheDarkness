@@ -8,9 +8,12 @@ public class KeyHandler {
     private GameArea gameArea;
     private Game game;
 
-    public KeyHandler(GameArea gameArea, Game game) {
+    private Gameplay gameplay;
+
+    public KeyHandler(GameArea gameArea, Game game, Gameplay gameplay) {
         this.gameArea = gameArea;
         this.game = game;
+        this.gameplay = gameplay;
         bindInit();
     }
 
@@ -34,6 +37,11 @@ public class KeyHandler {
         gameArea.getActionMap().put("keyPressedD", new RightActionPressed());
         gameArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_D,0,true), "keyReleasedD");
         gameArea.getActionMap().put("keyReleasedD", new RightActionReleased());
+
+        gameArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0,false), "keyPressedEnter");
+        gameArea.getActionMap().put("keyPressedEnter", new EnterActionPressed());
+        gameArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0,true), "keyReleasedEnter");
+        gameArea.getActionMap().put("keyReleasedEnter", new EnterActionReleased());
 
     }
 
@@ -96,6 +104,22 @@ public class KeyHandler {
         @Override
         public void actionPerformed(ActionEvent e) {
             game.getGameplay().setDX(0);
+        }
+    }
+
+    public class EnterActionPressed extends AbstractAction{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gameplay.getPlayer().checkQuest();
+        }
+    }
+
+    public class EnterActionReleased extends AbstractAction{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 }

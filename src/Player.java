@@ -168,4 +168,12 @@ public class Player {
             GameState.state = GameState.RESULTS;
         }
     }
+
+    public void checkQuest(){
+        int tempX = x + Game.tileSize/2;
+        int tempY = y + Game.tileSize/2;
+        if(mapConfigurator.mapData[(int)tempX/Game.tileSize][(int)tempY/Game.tileSize] == 3){
+            GameState.state = GameState.QUEST;
+        }
+    }
 }

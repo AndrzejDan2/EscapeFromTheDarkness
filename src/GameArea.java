@@ -13,7 +13,10 @@ public class GameArea extends JPanel {
         this.game = game;
         setBackground(Color.darkGray);
         setBounds(10,68, 1000, 680);
-        keyHandler = new KeyHandler(this, game);
+        keyHandler = new KeyHandler(this, game, game.getGameplay());
+        setFocusable(true);
+        requestFocus();
+
     }
 
 

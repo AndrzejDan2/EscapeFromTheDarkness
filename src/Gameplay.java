@@ -12,6 +12,7 @@ public class Gameplay {
     public long currentTime;
 
     public Gameplay(Game game) {
+
         this.game = game;
         mapConfigurator = new MapConfigurator(game);
         player = new Player();
@@ -42,6 +43,19 @@ public class Gameplay {
         g.setFont(font);
         g.setColor(Color.WHITE);
         g.drawString(time, 10, 10 + font.getSize());
+    }
+
+    public void showQuest(){
+        Quest quest = game.getQuest();
+        game.getGameWindow().remove(game.getGameArea());
+        game.getGameWindow().add(quest);
+        quest.setFocusable(true);
+        //game.getGameArea().setFocusable(false);
+        //quest.setFocusable(true);
+        //quest.requestFocus();
+        quest.revalidate();
+        quest.repaint();
+
     }
 
     public void setDX(int val){
