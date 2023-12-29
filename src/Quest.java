@@ -11,6 +11,7 @@ public class Quest extends JPanel {
         super();
         this.questConfigurator = questConfigurator;
         //isSolved = false;
+        setLayout(null);
         setBackground(Color.CYAN);
         setBounds(10,68, 1000, 680);
         questButtonHandler = new QuestButtonHandler(this.questConfigurator);

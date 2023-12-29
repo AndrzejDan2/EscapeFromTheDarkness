@@ -8,6 +8,7 @@ public class Gameplay {
     private Game game;
 
     public double gameTime;
+
     public long previousTime;
     public long currentTime;
 
@@ -43,6 +44,15 @@ public class Gameplay {
         g.setFont(font);
         g.setColor(Color.WHITE);
         g.drawString(time, 10, 10 + font.getSize());
+
+        double value = game.getQuestConfigurator().array.length/ (game.getQuestConfigurator().array.length + game.getQuestConfigurator().mistakes)*100;
+
+        String effectiveness = String.format("Skuteczność: %.2f%%", value);
+        Font font2 = new Font("Serif", Font.PLAIN, 36);
+        g.setFont(font2);
+        g.setColor(Color.WHITE);
+        g.drawString(effectiveness, 10, 50 + font.getSize());
+
     }
 
     public void showQuest(){

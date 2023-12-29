@@ -27,6 +27,8 @@ public class QuestButtonHandler implements ActionListener {
                 case "B4":
                     if(questConfigurator.isSolved[questConfigurator.questCounter]){
                         GameState.state = GameState.PLAY;
+                    }else{
+                        questConfigurator.mistakes += 1;
                     }
                     break;
             }

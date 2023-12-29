@@ -11,6 +11,7 @@ public class QuestConfigurator {
     public Player player;
 
     public int questCounter;
+    public double mistakes;
 
     public QuestConfigurator(MapConfigurator mapConfigurator, Player player) {
         this.mapConfigurator = mapConfigurator;
