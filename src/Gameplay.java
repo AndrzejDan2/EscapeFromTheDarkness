@@ -84,4 +84,8 @@ public class Gameplay {
     public MapConfigurator getMapConfigurator() {
         return mapConfigurator;
     }
+
+    public MapMask getMapMask() {
+        return mapMask;
+    }
 }

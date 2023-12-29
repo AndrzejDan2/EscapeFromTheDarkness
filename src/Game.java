@@ -19,7 +19,7 @@ public class Game implements Runnable{
         gameplay = new Gameplay(this);
         ga = new GameArea(this);
         gw = new GameWindow(ga);
-        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator(), gameplay.getPlayer());
+        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator(), gameplay.getPlayer(), gameplay.getMapMask());
         startGameLoop();
     }
 

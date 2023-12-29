@@ -5,22 +5,41 @@ import java.awt.geom.Ellipse2D;
 public class MapMask {
     Player player;
     int radius = 50;
-
+    private MapMask cpyMapMask;
+    public Area outter;
+    public MapMask(MapMask mapMask){
+        this.cpyMapMask = mapMask;
+    }
     public MapMask(Player player) {
         this.player = player;
+        this.outter = new Area(new Rectangle(0,0,Game.tileSize * Game.col,Game.tileSize * Game.row));
     }
 
+
     public void render(Graphics g){
+        Area temp = new Area(outter);
         Graphics2D g2 = (Graphics2D) g;
-        Area outter = new Area(new Rectangle(0,0,Game.tileSize * Game.col,Game.tileSize * Game.row));
         Ellipse2D.Double innerCircle = new Ellipse2D.Double(player.x + (Game.tileSize/2) - radius, player.y + (Game.tileSize/2) - radius, 2 * radius, 2 * radius);
-        outter.subtract(new Area(innerCircle));
+        temp.subtract(new Area(innerCircle));
 
         //Rectangle xd = new Rectangle(50,50,70,600);
-        //outter.subtract(new Area(xd));                //TODO checkpoints
+        //outter.subtract(new Area(xd));
+        // TODO checkpoints
+//        if(questConfigurator.isSolved[0]){
+//            Rectangle room = new Rectangle(40,0,320,440);
+//            outter.subtract(new Area(room));
+//        }
+
+//        if (questConfigurator != null) {
+//            System.out.println("Obiekt został utworzony.");
+//        } else {
+//            System.out.println("Obiekt nie został utworzony.");
+//        }
+
+
 
         g2.setColor(Color.BLACK);
-        g2.fill(outter);
+        g2.fill(temp);
     }
 
 }
