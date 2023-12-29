@@ -19,7 +19,7 @@ public class Game implements Runnable{
         gameplay = new Gameplay(this);
         ga = new GameArea(this);
         gw = new GameWindow(ga);
-        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator());
+        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator(), gameplay.getPlayer());
         startGameLoop();
     }
 
@@ -70,6 +70,7 @@ public class Game implements Runnable{
                 break;
             case QUEST:
                 //ga.setFocusable(false);
+                questConfigurator.checkCorrectness();
                 questConfigurator.questRequestFocus(questConfigurator.selectQuest());
 
                 break;

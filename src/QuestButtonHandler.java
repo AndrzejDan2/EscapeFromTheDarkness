@@ -16,10 +16,18 @@ public class QuestButtonHandler implements ActionListener {
         if(source instanceof JButton clickedButton){
             switch (clickedButton.getText()){
                 case "B1":
-                    questConfigurator.isSolved[questConfigurator.questCounter] = true;
-                    GameState.state = GameState.PLAY;
+                    questConfigurator.buffer[0] = !questConfigurator.buffer[0];
                     break;
                 case "B2":
+                    questConfigurator.buffer[1] = !questConfigurator.buffer[1];
+                    break;
+                case "B3":
+                    questConfigurator.buffer[2] = !questConfigurator.buffer[2];
+                    break;
+                case "B4":
+                    if(questConfigurator.isSolved[questConfigurator.questCounter]){
+                        GameState.state = GameState.PLAY;
+                    }
                     break;
             }
             System.out.println(GameState.state);
