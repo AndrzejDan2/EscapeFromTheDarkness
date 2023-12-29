@@ -49,6 +49,7 @@ public class Gameplay {
         Quest quest = game.getQuest();
         game.getGameWindow().remove(game.getGameArea());
         game.getGameWindow().add(quest);
+        //game.getQuestConfigurator().questCounter += 1;
         quest.setFocusable(true);
         //game.getGameArea().setFocusable(false);
         //quest.setFocusable(true);
@@ -68,5 +69,9 @@ public class Gameplay {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public MapConfigurator getMapConfigurator() {
+        return mapConfigurator;
     }
 }

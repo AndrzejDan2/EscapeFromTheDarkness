@@ -11,7 +11,7 @@ public class Game implements Runnable{
     private GameWindow gw;
     private Gameplay gameplay;
 
-    public Quest quest;
+    public QuestConfigurator questConfigurator;
 
     private boolean stopCount = true;
 
@@ -19,8 +19,7 @@ public class Game implements Runnable{
         gameplay = new Gameplay(this);
         ga = new GameArea(this);
         gw = new GameWindow(ga);
-        quest = new Quest();
-
+        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator());
         startGameLoop();
     }
 
@@ -34,11 +33,14 @@ public class Game implements Runnable{
 
         switch (GameState.state){
             case PLAY:
-                if(!isCompomentAdded(gw, ga)){
-                    System.out.println(isCompomentAdded(gw, ga));
-                    gw.remove(quest);
+                if(!isComponentAdded(gw, ga)){
+                    System.out.println(isComponentAdded(gw, ga));
+                    questConfigurator.update();
+                    gw.remove(questConfigurator.selectQuest());
                     gw.add(ga);
+                    questConfigurator.questCounter += 1;
                 }
+
                 gameplay.update();
                 ga.revalidate(); //must be here
                 ga.requestFocus();
@@ -68,7 +70,8 @@ public class Game implements Runnable{
                 break;
             case QUEST:
                 //ga.setFocusable(false);
-                quest.requestFocus();
+                questConfigurator.questRequestFocus(questConfigurator.selectQuest());
+
                 break;
 
         }
@@ -128,11 +131,15 @@ public class Game implements Runnable{
     }
 
     public Quest getQuest(){
-        return quest;
+        return questConfigurator.selectQuest();
     }
 
-    public boolean isCompomentAdded(Container container, Component component){
+    public boolean isComponentAdded(Container container, Component component){
         return SwingUtilities.isDescendingFrom(component, container);
 
+    }
+
+    public QuestConfigurator getQuestConfigurator() {
+        return questConfigurator;
     }
 }
