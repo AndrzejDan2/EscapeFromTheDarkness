@@ -35,7 +35,7 @@ public class Gameplay {
     public void render(Graphics g){
         mapConfigurator.draw(g);
         player.render(g);
-        //mapMask.render(g); //TODO uncomment if necessary
+        mapMask.render(g); //TODO uncomment if necessary
     }
 
     public void showFinalState(Graphics g){

@@ -22,27 +22,38 @@ public class Quest extends JPanel {
         add(image);
     }
 
+    public void reinitButtonsText(){
+        b1.setText("A");
+        b2.setText("B");
+        b3.setText("C");
+        b4.setBackground(Color.white);
+    }
+
     private void initButtons() {
         //b1 = new Button("B1", 374, 560, 50, 50,  new ImageIcon("res/Play.png"));
         b1 = new JButton("A");
         b1.setFont(new Font("Arial", Font.BOLD, 10));
         b1.setBounds(374,560,50,50);
         b1.setActionCommand("B1");
+        b1.setBackground(Color.white);
 
         b2 = new JButton("B");
         b2.setFont(new Font("Arial", Font.BOLD, 10));
         b2.setBounds(484, 560, 50, 50);
         b2.setActionCommand("B2");
+        b2.setBackground(Color.white);
 
         b3 = new JButton("C");
         b3.setFont(new Font("Arial", Font.BOLD, 10));
         b3.setBounds(581, 560, 50, 50);
         b3.setActionCommand("B3");
+        b3.setBackground(Color.white);
 
         b4 = new JButton("Check");
         b4.setFont(new Font("Arial", Font.BOLD, 10));
         b4.setBounds(700, 560, 100, 50);
         b4.setActionCommand("B4");
+        b4.setBackground(Color.white);
 
         b1.addActionListener(questButtonHandler);
         b2.addActionListener(questButtonHandler);

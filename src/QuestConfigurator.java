@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class QuestConfigurator {
-    Quest[] array = new Quest[4];
-    boolean[] isSolved = new boolean[4];
+    Quest[] array = new Quest[5];
+    boolean[] isSolved = new boolean[5];
 
     boolean[] buffer = new boolean[3];
     public MapConfigurator mapConfigurator;
@@ -47,6 +47,10 @@ public class QuestConfigurator {
         array[3].setBackground(Color.white);
         array[3].image.setIcon(new ImageIcon("res/quest4.png"));
 
+        array[4] = new Quest(this);
+        array[4].setBackground(Color.white);
+        array[4].image.setIcon(new ImageIcon("res/quest5.png"));
+
     }
 
     public boolean quest1Solution(boolean[] tab){
@@ -83,35 +87,46 @@ public class QuestConfigurator {
         return !(((a || b) ^ (b || c)) || !(b && c));
     }
 
+    public boolean quest5Solution(boolean[] tab){
+        boolean a = tab[0];
+        boolean b = tab[1];
+        boolean c = tab[2];
+
+        return ((a && b)^(b && c)) && (b || c) && !(b && c);
+    }
+
     public void update(){
         if(isSolved[0]){
-            mapConfigurator.mapData[4][11] = 0;
-            mapConfigurator.mapData[5][11] = 0;
-            Rectangle room = new Rectangle(40,0,320,480);
+            mapConfigurator.mapData[4][9] = 0;
+            mapConfigurator.mapData[5][9] = 0;
+            Rectangle room = new Rectangle(0,0,360,400);
             mapMask.outter.subtract(new Area(room));
         }
         if(isSolved[1]){
-            mapConfigurator.mapData[11][5] = 0;
-            mapConfigurator.mapData[12][5] = 0;
-            mapConfigurator.mapData[16][12] = 0;
-            mapConfigurator.mapData[16][13] = 0;
-            Rectangle shape1 = new Rectangle(40,480,640,320);
-            mapMask.outter.subtract(new Area(shape1));
-            Rectangle shape2 = new Rectangle(320,200,320,280);
-            mapMask.outter.subtract(new Area(shape2));
+            mapConfigurator.mapData[8][11] = 0;
+            mapConfigurator.mapData[8][12] = 0;
+            Rectangle room = new Rectangle(0,360,360,320);
+            mapMask.outter.subtract(new Area(room));
         }
         if(isSolved[2]){
-            Rectangle room = new Rectangle(680,400,280,240);
+            mapConfigurator.mapData[16][13] = 0;
+            mapConfigurator.mapData[16][12] = 0;
+            Rectangle room = new Rectangle(360,200,320,480);
             mapMask.outter.subtract(new Area(room));
         }
         if(isSolved[3]){
+            mapConfigurator.mapData[13][5] = 0;
+            mapConfigurator.mapData[14][5] = 0;
+            Rectangle room = new Rectangle(320,360,680,320);
+            mapMask.outter.subtract(new Area(room));
+        }
+        if(isSolved[4]){
             mapConfigurator.mapData[24][5] = 2;
             mapConfigurator.mapData[24][6] = 2;
-            Rectangle shape1 = new Rectangle(320,40,640,240);
+            Rectangle shape1 = new Rectangle(360,0,640,240);
             mapMask.outter.subtract(new Area(shape1));
-            Rectangle shape2 = new Rectangle(680,40,320,320);
+            Rectangle shape2 = new Rectangle(640,0,360,360);
             mapMask.outter.subtract(new Area(shape2));
-
         }
 
     }
@@ -143,6 +158,13 @@ public class QuestConfigurator {
             boolean solution = quest4Solution(buffer);
             if(solution){
                 isSolved[3] = true;
+                mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
+                Arrays.fill(buffer, false);
+            }
+        } else if (selectQuest().equals(array[4])) {
+            boolean solution = quest5Solution(buffer);
+            if(solution){
+                isSolved[4] = true;
                 mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
                 Arrays.fill(buffer, false);
             }

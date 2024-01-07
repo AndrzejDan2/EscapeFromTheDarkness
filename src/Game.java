@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Area;
+import java.util.Arrays;
 
 public class Game implements Runnable{
     private Thread gameThread;
@@ -64,6 +66,13 @@ public class Game implements Runnable{
                 gameplay.initTimeParameters();
                 questConfigurator.questCounter = 0;
                 getGameplay().getMapConfigurator().loadMap();
+                Arrays.fill(questConfigurator.buffer, false);
+                Arrays.fill(questConfigurator.isSolved, false);
+                questConfigurator.mistakes = 0;
+                for(int i = 0; i < questConfigurator.array.length; i++ ){
+                    questConfigurator.array[i].reinitButtonsText();
+                }
+                gameplay.getMapMask().outter = new Area(new Rectangle(0,0,Game.tileSize * Game.col,Game.tileSize * Game.row));
                 gameplay.getPlayer().initPosition(50,50);
                 //TODO MapMask config
                 GameState.state = GameState.PAUSE;
