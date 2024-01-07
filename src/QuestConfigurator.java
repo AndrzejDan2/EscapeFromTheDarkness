@@ -1,5 +1,10 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class QuestConfigurator {
@@ -26,29 +31,56 @@ public class QuestConfigurator {
 
     public void initQuests() {
         array[0] = new Quest(this);
-        array[0].setBackground(Color.BLACK);
-        array[0].answers[0] = true;
-        array[0].answers[1] = true;
-        array[0].answers[2] = true;
+        array[0].setBackground(Color.white);
+        array[0].image.setIcon(new ImageIcon("res/quest1.png"));
+
 
         array[1] = new Quest(this);
-        array[1].setBackground(Color.WHITE);
-        array[1].answers[0] = true;
-        array[1].answers[1] = true;
-        array[1].answers[2] = true;
+        array[1].setBackground(Color.white);
+        array[1].image.setIcon(new ImageIcon("res/quest2.png"));
 
         array[2] = new Quest(this);
-        array[2].setBackground(Color.YELLOW);
-        array[2].answers[0] = true;
-        array[2].answers[1] = true;
-        array[2].answers[2] = true;
+        array[2].setBackground(Color.white);
+        array[2].image.setIcon(new ImageIcon("res/quest3.png"));
 
         array[3] = new Quest(this);
-        array[3].setBackground(Color.GREEN);
-        array[3].answers[0] = true;
-        array[3].answers[1] = true;
-        array[3].answers[2] = true;
+        array[3].setBackground(Color.white);
+        array[3].image.setIcon(new ImageIcon("res/quest4.png"));
 
+    }
+
+    public boolean quest1Solution(boolean[] tab){
+        boolean a = tab[0];
+        boolean b = tab[1];
+        boolean c = tab[2];
+
+        boolean xorBC = (c && !b) || (!c && b);
+
+        return xorBC || c;
+    }
+
+    public boolean quest2Solution(boolean[] tab){
+        boolean a = tab[0];
+        boolean b = tab[1];
+        boolean c = tab[2];
+
+        return (!a^c) && ((!a^c)^b) && (a^((!a^c)^b));
+    }
+
+    public boolean quest3Solution(boolean[] tab){
+        boolean a = tab[0];
+        boolean b = tab[1];
+        boolean c = tab[2];
+
+        return (a && b) || ((b || c) && (b && c));
+    }
+
+    public boolean quest4Solution(boolean[] tab){
+        boolean a = tab[0];
+        boolean b = tab[1];
+        boolean c = tab[2];
+
+        return !(((a || b) ^ (b || c)) || !(b && c));
     }
 
     public void update(){
@@ -79,16 +111,41 @@ public class QuestConfigurator {
             mapMask.outter.subtract(new Area(shape1));
             Rectangle shape2 = new Rectangle(680,40,320,320);
             mapMask.outter.subtract(new Area(shape2));
+
         }
 
     }
 
 
     public void checkCorrectness(){
-        if(Arrays.equals(buffer, array[questCounter].answers)){
-            isSolved[questCounter] = true;
-            mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
-            Arrays.fill(buffer, false);
+        if (selectQuest().equals(array[0])) {
+            boolean solution = quest1Solution(buffer);
+            if(solution){
+                isSolved[0] = true;
+                mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
+                Arrays.fill(buffer, false);
+            }
+        } else if (selectQuest().equals(array[1])) {
+            boolean solution = quest2Solution(buffer);
+            if(solution){
+                isSolved[1] = true;
+                mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
+                Arrays.fill(buffer, false);
+            }
+        } else if (selectQuest().equals(array[2])) {
+            boolean solution = quest3Solution(buffer);
+            if(solution){
+                isSolved[2] = true;
+                mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
+                Arrays.fill(buffer, false);
+            }
+        } else if (selectQuest().equals(array[3])) {
+            boolean solution = quest4Solution(buffer);
+            if(solution){
+                isSolved[3] = true;
+                mapConfigurator.mapData[(int)(player.x + Game.tileSize/2)/Game.tileSize][(int)(player.y + Game.tileSize/2)/Game.tileSize] = 0;
+                Arrays.fill(buffer, false);
+            }
         }
 
     }

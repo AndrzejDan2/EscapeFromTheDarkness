@@ -62,6 +62,8 @@ public class Game implements Runnable{
                 break;
             case RESTART:
                 gameplay.initTimeParameters();
+                questConfigurator.questCounter = 0;
+                getGameplay().getMapConfigurator().loadMap();
                 gameplay.getPlayer().initPosition(50,50);
                 //TODO MapMask config
                 GameState.state = GameState.PAUSE;
@@ -70,7 +72,7 @@ public class Game implements Runnable{
                 break;
             case QUEST:
                 //ga.setFocusable(false);
-                questConfigurator.checkCorrectness();
+                //questConfigurator.checkCorrectness(); // <----- sprawdzenie poprawnosci jest rozwiazane po nacisnieciu przycisku B4
                 questConfigurator.questRequestFocus(questConfigurator.selectQuest());
 
                 break;
