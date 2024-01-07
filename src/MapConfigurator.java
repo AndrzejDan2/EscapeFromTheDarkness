@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class MapConfigurator {
     Game game;
-    Tile[] tile = new Tile[3];
+    Tile[] tile = new Tile[4];
 
     public int[][] mapData;
 
@@ -20,14 +20,17 @@ public class MapConfigurator {
     public void getImage(){
         try{
             tile[0] = new Tile();
-            tile[0].bufferedImage = ImageIO.read(new File("res/Tilev1.png"));
+            tile[0].bufferedImage = ImageIO.read(new File("res/red_floor.png"));
 
             tile[1] = new Tile();
-            tile[1].bufferedImage = ImageIO.read(new File("res/Tilev2.png"));
+            tile[1].bufferedImage = ImageIO.read(new File("res/wall.png"));
             tile[1].collision = true;
 
             tile[2] = new Tile();
             tile[2].bufferedImage = ImageIO.read(new File("res/Tilev3.png"));
+
+            tile[3] = new Tile();
+            tile[3].bufferedImage = ImageIO.read(new File("res/quest.png"));
 
         }catch (IOException e){
             e.printStackTrace();

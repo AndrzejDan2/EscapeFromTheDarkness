@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 public class Game implements Runnable{
@@ -9,14 +10,16 @@ public class Game implements Runnable{
     private GameArea ga;
     private GameWindow gw;
     private Gameplay gameplay;
+
+    public QuestConfigurator questConfigurator;
+
     private boolean stopCount = true;
 
     public Game() {
         gameplay = new Gameplay(this);
         ga = new GameArea(this);
         gw = new GameWindow(ga);
-        ga.setFocusable(true);
-        ga.requestFocus();
+        questConfigurator = new QuestConfigurator(gameplay.getMapConfigurator(), gameplay.getPlayer(), gameplay.getMapMask());
         startGameLoop();
     }
 
@@ -30,11 +33,21 @@ public class Game implements Runnable{
 
         switch (GameState.state){
             case PLAY:
+                if(!isComponentAdded(gw, ga)){
+                    System.out.println(isComponentAdded(gw, ga));
+                    questConfigurator.update();
+                    gw.remove(questConfigurator.selectQuest());
+                    gw.add(ga);
+                    questConfigurator.questCounter += 1;
+                }
+
                 gameplay.update();
+                ga.revalidate(); //must be here
                 ga.requestFocus();
                 if(stopCount){
                     gameplay.previousTime = System.currentTimeMillis();
                     stopCount = false;
+                    //ga.revalidate(); //must be here
                 }
                 break;
             case RESULTS:
@@ -49,6 +62,8 @@ public class Game implements Runnable{
                 break;
             case RESTART:
                 gameplay.initTimeParameters();
+                questConfigurator.questCounter = 0;
+                getGameplay().getMapConfigurator().loadMap();
                 gameplay.getPlayer().initPosition(50,50);
                 //TODO MapMask config
                 GameState.state = GameState.PAUSE;
@@ -56,6 +71,10 @@ public class Game implements Runnable{
                 stopCount = true;
                 break;
             case QUEST:
+                //ga.setFocusable(false);
+                //questConfigurator.checkCorrectness(); // <----- sprawdzenie poprawnosci jest rozwiazane po nacisnieciu przycisku B4
+                questConfigurator.questRequestFocus(questConfigurator.selectQuest());
+
                 break;
 
         }
@@ -68,6 +87,7 @@ public class Game implements Runnable{
                 gameplay.render(g);
                 break;
             case QUEST:
+                gameplay.showQuest();
                 break;
             case RESULTS:
                 gameplay.showFinalState(g);
@@ -98,9 +118,7 @@ public class Game implements Runnable{
                 System.out.println("FPS: "+ frames);
                 frames = 0;
             }
-
         }
-
     }
 
     public Gameplay getGameplay(){
@@ -109,5 +127,22 @@ public class Game implements Runnable{
 
     public GameArea getGameArea(){
         return ga;
+    }
+
+    public GameWindow getGameWindow(){
+        return gw;
+    }
+
+    public Quest getQuest(){
+        return questConfigurator.selectQuest();
+    }
+
+    public boolean isComponentAdded(Container container, Component component){
+        return SwingUtilities.isDescendingFrom(component, container);
+
+    }
+
+    public QuestConfigurator getQuestConfigurator() {
+        return questConfigurator;
     }
 }

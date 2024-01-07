@@ -6,8 +6,7 @@ public class ButtonHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if(source instanceof JButton){
-            JButton clickedButton = (JButton) source;
+        if(source instanceof JButton clickedButton){
             switch (clickedButton.getText()){
                 case "Play":
                     GameState.state = GameState.PLAY;
@@ -21,13 +20,9 @@ public class ButtonHandler implements ActionListener {
                 case "Exit":
                     System.exit(0);
                     break;
-
             }
             System.out.println(GameState.state);
         }
     }
 
-    private void handleRestartButton(){
-
-    }
 }

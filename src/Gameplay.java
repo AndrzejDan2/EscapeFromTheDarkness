@@ -8,10 +8,12 @@ public class Gameplay {
     private Game game;
 
     public double gameTime;
+
     public long previousTime;
     public long currentTime;
 
     public Gameplay(Game game) {
+
         this.game = game;
         mapConfigurator = new MapConfigurator(game);
         player = new Player();
@@ -42,6 +44,29 @@ public class Gameplay {
         g.setFont(font);
         g.setColor(Color.WHITE);
         g.drawString(time, 10, 10 + font.getSize());
+
+        double value = game.getQuestConfigurator().array.length/ (game.getQuestConfigurator().array.length + game.getQuestConfigurator().mistakes)*100;
+
+        String effectiveness = String.format("Skuteczność: %.2f%%", value);
+        Font font2 = new Font("Serif", Font.PLAIN, 36);
+        g.setFont(font2);
+        g.setColor(Color.WHITE);
+        g.drawString(effectiveness, 10, 50 + font.getSize());
+
+    }
+
+    public void showQuest(){
+        Quest quest = game.getQuest();
+        game.getGameWindow().remove(game.getGameArea());
+        game.getGameWindow().add(quest);
+        //game.getQuestConfigurator().questCounter += 1;
+        quest.setFocusable(true);
+        //game.getGameArea().setFocusable(false);
+        //quest.setFocusable(true);
+        //quest.requestFocus();
+        quest.revalidate();
+        quest.repaint();
+
     }
 
     public void setDX(int val){
@@ -54,5 +79,13 @@ public class Gameplay {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public MapConfigurator getMapConfigurator() {
+        return mapConfigurator;
+    }
+
+    public MapMask getMapMask() {
+        return mapMask;
     }
 }
