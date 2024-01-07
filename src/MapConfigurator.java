@@ -27,7 +27,7 @@ public class MapConfigurator {
             tile[1].collision = true;
 
             tile[2] = new Tile();
-            tile[2].bufferedImage = ImageIO.read(new File("res/Tilev3.png"));
+            tile[2].bufferedImage = ImageIO.read(new File("res/finish.png"));
 
             tile[3] = new Tile();
             tile[3].bufferedImage = ImageIO.read(new File("res/quest.png"));
@@ -39,9 +39,9 @@ public class MapConfigurator {
 
     public void draw(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        for(int i = 0; i < game.row; i++){
-            for(int j = 0; j < game.col; j++){
-                g2.drawImage(tile[mapData[j][i]].bufferedImage,j * game.tileSize, i * game.tileSize ,game.tileSize, game.tileSize, null);
+        for(int i = 0; i < Game.row; i++){
+            for(int j = 0; j < Game.col; j++){
+                g2.drawImage(tile[mapData[j][i]].bufferedImage,j * Game.tileSize, i * Game.tileSize, Game.tileSize, Game.tileSize, null);
             }
         }
 

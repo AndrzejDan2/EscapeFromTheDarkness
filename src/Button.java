@@ -15,7 +15,6 @@ public class Button extends JButton {
         this.width = width;
         this.height = height;
         setBounds(this.x, this.y, this.width, this.height);
-        //setBorder(BorderFactory.createEmptyBorder(0,18,0,0)); //resetuje obramowanie i jest super
         setMargin(new Insets(0, 17, 0, 0));
     }
 

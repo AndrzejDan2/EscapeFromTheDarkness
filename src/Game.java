@@ -13,7 +13,7 @@ public class Game implements Runnable{
     private GameWindow gw;
     private Gameplay gameplay;
 
-    public QuestConfigurator questConfigurator;
+    private QuestConfigurator questConfigurator;
 
     private boolean stopCount = true;
 

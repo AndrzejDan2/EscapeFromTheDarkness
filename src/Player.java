@@ -21,7 +21,6 @@ public class Player {
 
     int dx;
     int dy;
-    //TODO hitbox
     MapConfigurator mapConfigurator;
     boolean isMapLoaded;
 

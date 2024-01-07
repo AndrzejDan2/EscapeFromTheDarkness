@@ -40,7 +40,7 @@ public class Gameplay {
 
     public void showFinalState(Graphics g){
         String time = String.format("Czas rozgrywki: %.2f s", this.gameTime);
-        Font font = new Font("Serif", Font.PLAIN, 36);
+        Font font = new Font("Arial", Font.PLAIN, 36);
         g.setFont(font);
         g.setColor(Color.WHITE);
         g.drawString(time, 10, 10 + font.getSize());

@@ -21,23 +21,6 @@ public class MapMask {
         Graphics2D g2 = (Graphics2D) g;
         Ellipse2D.Double innerCircle = new Ellipse2D.Double(player.x + (Game.tileSize/2) - radius, player.y + (Game.tileSize/2) - radius, 2 * radius, 2 * radius);
         temp.subtract(new Area(innerCircle));
-
-        //Rectangle xd = new Rectangle(50,50,70,600);
-        //outter.subtract(new Area(xd));
-        // TODO checkpoints
-//        if(questConfigurator.isSolved[0]){
-//            Rectangle room = new Rectangle(40,0,320,440);
-//            outter.subtract(new Area(room));
-//        }
-
-//        if (questConfigurator != null) {
-//            System.out.println("Obiekt został utworzony.");
-//        } else {
-//            System.out.println("Obiekt nie został utworzony.");
-//        }
-
-
-
         g2.setColor(Color.BLACK);
         g2.fill(temp);
     }
