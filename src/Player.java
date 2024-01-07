@@ -155,7 +155,7 @@ public class Player {
 
     public void setImage(){
         try{
-            this.bufferedImage = ImageIO.read(new File("res/Guy.png"));
+            this.bufferedImage = ImageIO.read(new File("res/character.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
